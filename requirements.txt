@@ -1,0 +1,2 @@
+sensu_plugin==0.10
+netCDF4==1.2.4

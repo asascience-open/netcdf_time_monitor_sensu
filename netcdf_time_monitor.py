@@ -20,7 +20,10 @@ class NetCDFTimeCheck(SensuPluginCheck):
 
     def run(self):
         self.check_name('netcdf_time_check')
-        ds = Dataset(self.options.dataset)
+        try:
+            ds = Dataset(self.options.dataset)
+        except IOError as io_exc:
+            self.critical(io_exc)
         time_var = ds.variables[self.options.variable]
         if not len(time_var):
             self.critical("No data present in variable {}".format(time_var))
